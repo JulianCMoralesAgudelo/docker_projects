@@ -1,0 +1,42 @@
+# Usa la imagen base de Miniconda3
+FROM continuumio/miniconda3
+
+# Etiqueta de información sobre el mantenimiento del archivo
+LABEL maintainer="Julian Morales <juliancmorales10@gmail.com>"
+
+# Instala Jupyter Notebook
+RUN conda install -y jupyter && \
+conda clean -afy
+
+# Crea un directorio para los notebooks
+RUN mkdir /opt/notebooks
+
+#  Establece el directorio de trabajo
+WORKDIR /opt/notebooks
+
+# Copia el contenido local al contenedor en el directorio de trabajo
+COPY . /opt/notebooks
+
+# Expone el puerto 8888 para acceder a Jupyter Notebook
+EXPOSE 8888
+
+# Comando para ejecutar Jupyter Notebook
+CMD ["/opt/conda/bin/jupyter", "notebook", "--notebook-dir=/opt/notebooks", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
+
+# Ejecutar después
+# docker build -t anaconda_image .
+
+# Crear contenedor
+# docker run -it -p 8888:8888 --name anaconda_jupyter_server anaconda_image
+
+# Ingresar al contenedor
+# docker exec -it anaconda_jupyter_server /bin/bash
+
+# Actualizar anaconda
+# conda update conda && conda update --all
+
+# Salir
+# exit
+
+# Ejecutar después
+# docker run -it -p 8888:8888 --name anaconda_container anaconda_image
