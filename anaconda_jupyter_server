@@ -23,13 +23,13 @@ EXPOSE 8888
 # Comando para ejecutar Jupyter Notebook
 CMD ["/opt/conda/bin/jupyter", "notebook", "--notebook-dir=/opt/notebooks", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
 
-# Ejecutar después
+# Crear imagen contenedor
 # docker build -t anaconda_image .
 
 # Crear contenedor
 # docker run -it -p 8888:8888 --name anaconda_jupyter_server anaconda_image
 
-# Ingresar al contenedor
+# Ingresar al contendor
 # docker exec -it anaconda_jupyter_server /bin/bash
 
 # Actualizar anaconda
@@ -38,5 +38,5 @@ CMD ["/opt/conda/bin/jupyter", "notebook", "--notebook-dir=/opt/notebooks", "--i
 # Salir
 # exit
 
-# Ejecutar después
-# docker run -it -p 8888:8888 --name anaconda_container anaconda_image
+# Iniciar contenedor
+# docker start anaconda_jupyter_server
