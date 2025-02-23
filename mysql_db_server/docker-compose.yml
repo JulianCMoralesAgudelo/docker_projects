@@ -1,0 +1,22 @@
+version: '3.8'  # Se recomienda usar la versión 3.8 o superior
+
+services:
+  mysql:
+    image: mysql:8.0  # Usa la versión 8.0 de MySQL
+    container_name: mysql_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=4Dm1nDB*  # Contraseña del usuario root
+      - MYSQL_DATABASE=test_db  # Nombre de la base de datos inicial
+      - MYSQL_USER=admin  # Usuario adicional
+      - MYSQL_PASSWORD=4Dm1nDB*  # Contraseña del usuario
+    ports:
+      - 3306:3306  # Expone MySQL para conexiones externas
+    volumes:
+      - /data/mysql:/var/lib/mysql  # Monta los datos de MySQL en /data/mysql
+    restart: always  # Reinicia el contenedor automáticamente si falla
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
