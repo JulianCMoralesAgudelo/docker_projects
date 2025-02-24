@@ -19,3 +19,12 @@ db.libros.find({}, { titulo: 1, _id: 0 }).pretty()
 
 # Obtener Todos los Títulos en un Array
 db.libros.find({}, { titulo: 1, _id: 0 }).map(doc => doc.titulo)
+
+# Actualizar muchos libros
+db.libros.updateMany(
+  { precio: {$gt: 10}},    // Filtro: busca el precio con ese valor
+  { $set: { precio: 150 }}  // Actualiza el precio
+)
+
+# Buscar cambios realizados
+db.libros.find({precio: 150})
