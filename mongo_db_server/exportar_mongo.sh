@@ -4,7 +4,7 @@
 CONTAINER_NAME="mongo_db"
 
 # Ruta donde se guardará el backup dentro del contenedor
-BACKUP_PATH="/data/db/dump"
+BACKUP_PATH="/data/db/mongo/dump"
 
 # Mensaje de inicio
 echo "📦 Exportando bases de datos de MongoDB en el contenedor '$CONTAINER_NAME'..."
