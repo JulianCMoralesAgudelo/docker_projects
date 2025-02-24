@@ -1,4 +1,0 @@
-# Buscar todas los empleados que trabajen en Google 
-db.empleados.find({empresa: "Google"}) 
-
-# Empleados que vivan en Peru 
