@@ -1,17 +1,17 @@
 services:
   mysql:
-    image: mysql:8.0  # Usa la versión 8.0 de MySQL
+    image: mysql:latest  # Usa la última versión disponible de MySQL
     container_name: mysql_db
     environment:
-      - MYSQL_ROOT_PASSWORD=4Dm1nDB*  # Contraseña del usuario root
-      - MYSQL_DATABASE=test_db  # Nombre de la base de datos inicial
-      - MYSQL_USER=admin  # Usuario adicional
-      - MYSQL_PASSWORD=4Dm1nDB*  # Contraseña del usuario
+      - MYSQL_ROOT_PASSWORD=4Dm1nDB*
+      - MYSQL_DATABASE=test_db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=4Dm1nDB*
     ports:
-      - 3306:3306  # Expone MySQL para conexiones externas
+      - 3306:3306
     volumes:
-      - /data/mysql:/var/lib/mysql  # Monta los datos de MySQL en /data/mysql
-    restart: always  # Reinicia el contenedor automáticamente si falla
+      - ./mysql_data:/var/lib/mysql  # Datos persistentes en tu carpeta local
+    restart: always
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 15s
