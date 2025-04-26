@@ -1,0 +1,22 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql_db
+    environment:
+      - TZ=America/Bogota   # Configura la zona horaria en el sistema
+      - MYSQL_ROOT_PASSWORD=4Dm1nDB*
+      - MYSQL_DATABASE=test_db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=4Dm1nDB*
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    restart: always
+    command: --default-time-zone='-05:00'  # <-- Añade esto para MySQL
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 20s

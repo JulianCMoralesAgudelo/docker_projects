@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  mysql:
+    image: cytopia/mysql-5.7
+    container_name: mysql57
+    ports:
+      - 3307:3306  # Expone el puerto 3306 del contenedor en el puerto 3307 de tu máquina
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: adminpass
+    volumes:
+      - ./mysql57_data:/var/lib/mysql  # Volumen persistente
+    restart: always
+
