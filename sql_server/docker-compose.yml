@@ -1,0 +1,25 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "4Dm1nDB*"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./sqlserver_data:/var/opt/mssql
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 4Dm1nDB* -Q 'SELECT 1'" ]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+    networks:
+      - red_local_sqlserver
+
+networks:
+  red_local_sqlserver:
+    driver: bridge
